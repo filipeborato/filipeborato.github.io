@@ -22,7 +22,7 @@
       <br>
       <br>
       <!-- buttons -->
-      <a href="https://www.linkedin.com/in/filipe-borato-608782a7/" class="button leftmar ">Linkedin</a> <a href="https://github.com/filipeborato" class="button ">Github</a> <a href="https://www.youtube.com/channel/UCu4afOcZBYjo3cSrCk2aMrg" class="button ">Youtube</a> <a href="public/Filipe_Borato_CV.pdf" class="button ">CV</a>
+      <a href="https://www.linkedin.com/in/filipe-borato-608782a7/" class="button leftmar ">Linkedin</a> <a href="https://github.com/filipeborato" class="button ">Github</a> <a href="https://www.youtube.com/channel/UCu4afOcZBYjo3cSrCk2aMrg" class="button ">Youtube</a> <a href="public/Filipe_Borato_CV.pdf" class="button ">CV</a> <a href="https://soundcloud.com/filipeborato" class="button ">S1</a> <a href="https://soundcloud.com/synthwavecyberpunk/" class="button ">S2</a>
       <!-- horizontal rule-->
       <hr class="hr">
       <!-- paragraph -->
@@ -34,46 +34,67 @@
          Today I work as a Back End Developer creating web solutions with the most current tools and techniques on the market, mainly using the Go and Python language.
          My two other passions are audio and music. I have some projects created in these areas and I intend to develop other works that interest me.
       </p>
-      <h2 class="left">Heading 2</h2>
+      <h2 class="left">Convictions</h2>
       <!-- blockquotes | make sure to add a "cite" link/' cite="#" ' or it won't work -->
       
-      <blockquote cite="#" > this is a blockquote.
-      </blockquote>
-      <br>
-      <blockquote>One day I'm gonna make, The onions cry.
+      <blockquote cite="#" > It's much harder to build than to destroy..
+      </blockquote>      
+      <blockquote>Abstract work demands creativity.
       </blockquote>
       <blockquote>Do not take life too seriously. You will never get out of it alive.
       </blockquote>
       
-      <h3 class="left">Heading 3</h3>
+      <h3 class="left">Some Codes</h3>
       
-                  <pre class="prettyprint">
-                   // Javascript with syntax highlighting
-                   // thelearn-tech@github
-                     
-                  const files = [ 'foo.txt ', '.bar', '   ', 'baz.foo' ];
-                  let filePaths = [];
-                  for (let file of files) {
-                    const fileName = file.trim();
-                    if(fileName) {
-                      const filePath = `~/cool_app/${fileName}`;
-                      filePaths.push(filePath);
-                    }
-                  }
-      // filePaths = [ '~/cool_app/foo.txt', '~/cool_app/.bar', '~/cool_app/baz.foo']</pre>
+      <pre class="prettyprint">
+      // C++ audio example
+      // filipeborato@github
+            
+      float CompreezorAudioProcessor::calcCompressorGain(float fDetectorValue, float fThreshold, float fRatio, float fKneeWidth, bool bLimit)
+      {
+         // slope variable
+         float CS = 1.0 - 1.0 / fRatio; // [ Eq. 13.1 ]
+                                 // limiting is infinite ratio thus CS->1.0
+                                 //if (bLimit)
+                                 //CS = 1;
+      
+                                 // soft-knee with detection value in range?
+         if (fKneeWidth > 0 && fDetectorValue > (fThreshold - fKneeWidth / 2.0) &&
+            fDetectorValue < fThreshold + fKneeWidth / 2.0)
+         {
+            // setup for Lagrange
+            double x[2];
+            double y[2];
+            x[0] = fThreshold - fKneeWidth / 2.0;
+            x[1] = fThreshold + fKneeWidth / 2.0;
+            x[1] = min(0, x[1]); // top limit is 0dBFS
+            y[0] = 0; // CS = 0 for 1:1 ratio
+            y[1] = CS; // current CS
+      
+                     // interpolate & overwrite CS
+            CS = lagrpol(&x[0], &y[0], 2, fDetectorValue);
+         }
+         // compute gain; threshold and detection values are in dB
+         float yG = CS * (fThreshold - fDetectorValue); // [ Eq. 13.1 ]
+                                             // clamp; this allows ratios of 1:1 to still operate
+         yG = min(0, yG);
+      
+         // convert back to linear
+         return pow(10.0, yG / 20.0);
+      }</pre>
       <br>
       
-                  <pre class="prettyprint">
-                  # Python code with syntax highlighting
-                  # thelearn-tech@github
-                  from os import path
-                  def check_for_file():
-                      print("Does file exist:", path.exists("data.csv"))
-                  if __name__=="__main__":
-                      check_for_file()
+      <pre class="prettyprint">
+      # Python code with syntax highlighting
+      # thelearn-tech@github
+      from os import path
+      def check_for_file():
+            print("Does file exist:", path.exists("data.csv"))
+      if __name__=="__main__":
+            check_for_file()
       </pre>
       
-      <h4 class="left" >Heading 4</h4>
+      <h4 class="left" >List Example 1</h4>
       
       <ul>
          <!-- Unordered list -->
@@ -82,7 +103,7 @@
          <li>This is an unordered list, following a heading.</li>
       </ul>
       
-      <h5 class="left" >Heading 5</h5>
+      <h5 class="left" >List Example 2</h5>
       
       <ol>
          <!-- Unordered list -->
@@ -91,7 +112,7 @@
          <li>This is an ordered list, following a heading.</li>
       </ol>
       
-      <h6 class="left">Heading 6</h6>
+      <h6 class="left">Table Example</h6>
       
       <table class="left">
          <tr>
@@ -160,19 +181,19 @@
          </ul>
       </ul>
       <br>
-      <!-- small images -->
+      <!-- small images
       <h5 class="left">Small image</h5>
       <l class="gray left" >click on image to view source.</l>
       
-      <h2></h2>
-      <!-- img -->
+      <h2></h2> -->
+      <!-- img 
       <a href="https://github.com/logos"><img src="https://i.ibb.co/DM5nzg9/Octocat.png" alt="github png" class="smallimg"></a>  <a href="https://www.freepnglogos.com/pics/linux"><img src="https://i.ibb.co/JQKxhJw/the-linux-kernel.png" alt="linux compiling kernel png" class="smallimg"> </a>
       <br>
-      <h2></h2>
+      <h2></h2>-->
       <!-- large image -->
-      <h5 class="left">Large image</h5>
+      <h5 class="left">Mind Map Hacker</h5>
       <h2></h2>
-      <img src="https://i.ibb.co/M16Bj41/Friday-info.jpg" alt="friday info" class="largeimg left">
+      <img src="public/hacker-think.jpg" alt="friday info" class="largeimg left">
       <h2></h2>
       <!-- img --->
       <h5 class="left">Description list:</h5>
@@ -188,7 +209,7 @@
          <dt>Language</dt>
          <dd>HTML CSS JS</dd>
       </dl>
-      <!-- long commands -->
+      <!-- long commands 
       <div class="horizontalscroll left">
          <l>For long commands or code scroll should be horizontal rather than vertical. Very longgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg text. </l>
       </div>
@@ -196,7 +217,7 @@
       <div class="horizontalscroll left">
          <l>Enjoy the theme</l>
       </div>
-      <br>
+      <br>-->
       <!-- footer -->
       <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
          <button onclick="topFunction()" class="w3-button w3-light-grey" title="Go to top"><i class="fa fa-arrow-up w3-margin-right w3-light-grey"></i>To Top</button>
